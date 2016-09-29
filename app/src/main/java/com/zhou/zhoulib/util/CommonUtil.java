@@ -105,24 +105,12 @@ public class CommonUtil {
 		return m.matches();
 	}
 
-	/**
-	 * 优享卡帐号 正则判断
-	 * 
-	 * @param
-	 * @return
-	 */
 	public static boolean isCardId(String str) {
 		if (str != null && !"".equals(str.trim()) && str.matches("^[A-Za-z0-9]+$") && str.length() == 20)
 			return true;
 		return false;
 	}
 
-	/**
-	 * 优享卡密码 正则判断
-	 * 
-	 * @param
-	 * @return
-	 */
 	public static boolean isCardPwd(String str) {
 		if (str != null && !"".equals(str.trim()) && str.matches("^\\d{18}$"))
 			return true;
@@ -145,12 +133,6 @@ public class CommonUtil {
 		}
 	}
 
-	/**
-	 * 昵称 正则判断
-	 * 
-	 * @param
-	 * @return
-	 */
 	public static boolean isPersonName(String str) {
 		if (str != null && !"".equals(str.trim()) && str.matches("^\\w+$") && str.length() <= 16)
 			return true;
