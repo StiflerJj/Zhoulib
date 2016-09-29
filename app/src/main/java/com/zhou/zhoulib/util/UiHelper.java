@@ -8,6 +8,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+//import com.cetcnav.gateway.R;
 
 /**
  * Created by cetnavjj on 2016/3/25.

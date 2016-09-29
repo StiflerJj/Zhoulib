@@ -11,6 +11,7 @@ public class DeviceInfo implements Serializable{
     private String serialId;
     private String deviceId;
     private String endPoint;
+    private String shoraddr;
     private String profileId;
     private String zclVersion;
     private String applicationVersion;
@@ -47,6 +48,9 @@ public class DeviceInfo implements Serializable{
     public void setEndPoint(String endPoint) {
         this.endPoint = endPoint;
     }
+
+    public String getShoraddr() {return shoraddr;}
+    public void setShoraddr(String shoraddr) {this.shoraddr = shoraddr;}
 
     public String getProfileId() {
         return profileId;
@@ -150,6 +154,7 @@ public class DeviceInfo implements Serializable{
                 "serialId='" + serialId + '\'' +
                 ", deviceId='" + deviceId + '\'' +
                 ", endPoint='" + endPoint + '\'' +
+                ", shoraddr='" + shoraddr + '\'' +
                 ", profileId='" + profileId + '\'' +
                 ", zclVersion='" + zclVersion + '\'' +
                 ", applicationVersion='" + applicationVersion + '\'' +

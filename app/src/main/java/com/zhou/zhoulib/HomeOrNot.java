@@ -1,6 +1,7 @@
 package com.zhou.zhoulib;
 
 import android.os.StrictMode;
+import android.util.Log;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -92,6 +93,7 @@ public class HomeOrNot {
             try{
                 c.receive(receivePacket);
             }catch (SocketTimeoutException e){
+                e.printStackTrace();
 
             }
 
@@ -113,6 +115,7 @@ public class HomeOrNot {
         } catch (IOException ex) {
             Logger.getLogger("-------------------------------------------------------------------------ccc").log(Level.WARNING,null,ex);
         }
+        Log.e("HomeOrNot", "DoText IPAddress =" + ipAddr);
         return ipAddr;
     }
 }

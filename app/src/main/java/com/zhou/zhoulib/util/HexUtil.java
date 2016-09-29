@@ -160,7 +160,7 @@ import java.util.Arrays;
     }
 
     public static String addZero(int length){
-        String s = String.format("%02d",length);
+        String s = String.format("%02x",length);
         return s;
     }
     public static String  padLeft(String s, int length)

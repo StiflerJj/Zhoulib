@@ -25,31 +25,30 @@ public class GetDeviceInfoResponse {
     public GetDeviceInfoResponse(String deviceResponsestr){
         if(deviceResponsestr!=null && deviceResponsestr.length()>50){
             String body = deviceResponsestr.substring(10,deviceResponsestr.length()-4);
-            Log.e("GetDeviceInfoResponse",body);
+            Log.e("deviceInfoStr",body);
             deviceInfo = new DeviceInfo();
             deviceInfo.setSerialId(body.substring(0, 8));
             deviceInfo.setDeviceId(body.substring(8, 24));
             deviceInfo.setEndPoint(body.substring(24, 26));
-            deviceInfo.setProfileId(body.substring(26, 30));
-            deviceInfo.setZclVersion(body.substring(30, 32));
-            deviceInfo.setApplicationVersion(body.substring(32, 34));
-            deviceInfo.setStackVersion(body.substring(34, 36));
-            deviceInfo.setHwVersion(body.substring(36, 38));
-            int manufacturenamelen = Integer.parseInt(body.substring(38, 40));
+            deviceInfo.setShoraddr(body.substring(26, 30));
+            deviceInfo.setProfileId(body.substring(30, 34));
+            deviceInfo.setZclVersion(body.substring(34, 36));
+            deviceInfo.setApplicationVersion(body.substring(36, 38));
+            deviceInfo.setStackVersion(body.substring(38, 40));
+            deviceInfo.setHwVersion(body.substring(40, 42));
+            int manufacturenamelen = Integer.parseInt(body.substring(42, 44),16);
             deviceInfo.setManufacturernamelen(manufacturenamelen);
             if(manufacturenamelen>0)
-                deviceInfo.setManufacturername(body.substring(40,40+manufacturenamelen*2));
-            int modelidentifierlen = Integer.parseInt(body.substring(40+manufacturenamelen*2,42+manufacturenamelen*2));
+                deviceInfo.setManufacturername(body.substring(44,44+manufacturenamelen*2));
+            int modelidentifierlen = Integer.parseInt(body.substring(44+manufacturenamelen*2,46+manufacturenamelen*2),16);
             deviceInfo.setModelidentifierlen(modelidentifierlen);
             if(modelidentifierlen>0)
-                deviceInfo.setModelidentifier(body.substring(42+manufacturenamelen*2,42+manufacturenamelen*2+modelidentifierlen*2));
-            int datecodelen = Integer.parseInt(body.substring(42+manufacturenamelen*2+modelidentifierlen*2,44+manufacturenamelen*2+modelidentifierlen*2));
+                deviceInfo.setModelidentifier(body.substring(46+manufacturenamelen*2,46+manufacturenamelen*2+modelidentifierlen*2));
+            int datecodelen = Integer.parseInt(body.substring(46+manufacturenamelen*2+modelidentifierlen*2,48+manufacturenamelen*2+modelidentifierlen*2),16);
             deviceInfo.setDatecodelen(datecodelen);
-            deviceInfo.setDatecode(body.substring(44 + manufacturenamelen*2 + modelidentifierlen*2, 44 + manufacturenamelen*2 + modelidentifierlen*2 + datecodelen*2));
-            deviceInfo.setPowersource(body.substring(44+manufacturenamelen*2+modelidentifierlen*2+datecodelen*2,44+manufacturenamelen*2+modelidentifierlen*2+datecodelen*2+2));
+            deviceInfo.setDatecode(body.substring(48 + manufacturenamelen*2 + modelidentifierlen*2, 48 + manufacturenamelen*2 + modelidentifierlen*2 + datecodelen*2));
+            deviceInfo.setPowersource(body.substring(48+manufacturenamelen*2+modelidentifierlen*2+datecodelen*2,50+manufacturenamelen*2+modelidentifierlen*2+datecodelen*2));
             setDeviceInfo(deviceInfo);
-
-
 
         }
 

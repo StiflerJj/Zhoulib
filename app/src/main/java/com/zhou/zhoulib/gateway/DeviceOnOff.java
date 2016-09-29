@@ -5,7 +5,6 @@ import android.util.Log;
 import com.zhou.zhoulib.util.HexUtil;
 import com.zhou.zhoulib.util.YHUtils;
 
-
 /**
  * Created by cetnavjj on 2016/3/25.
  */
@@ -27,6 +26,5 @@ public class DeviceOnOff extends Base{
         Log.e("DeviceOnOff", stringBuffer.toString());
         requestBytes = HexUtil.hexStringToBytes(stringBuffer.toString());
         setRequestBytes(requestBytes);
-
     }
 }

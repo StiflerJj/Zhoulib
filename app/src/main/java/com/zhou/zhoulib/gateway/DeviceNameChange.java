@@ -18,9 +18,9 @@ public class DeviceNameChange extends Base{
         stringBufferOld.append(serialId);
         stringBufferOld.append(deviceId);
         byte[] nameBytesOld = HexUtil.hexStringToBytes(HexUtil.encodeText(newName));
-        Log.e("renamehex", " HexUtil.encode" + HexUtil.encodeText(newName));
+        //Log.e("renamehex", " HexUtil.encode" + HexUtil.encodeText(newName));
         String nameLengthOld = HexUtil.addZero(nameBytesOld.length);
-        Log.e("renamehexbytelength"," HexUtil.length"+nameLengthOld);
+        //Log.e("renamehexbytelength"," HexUtil.length"+nameLengthOld);
         stringBufferOld.append(nameLengthOld);
         stringBufferOld.append(HexUtil.encode(newName));
         byte[] bytesOld = HexUtil.hexStringToBytes(stringBufferOld.toString());
@@ -44,6 +44,7 @@ public class DeviceNameChange extends Base{
         Log.e("renamehexbytelength"," HexUtil.length"+nameLength);
         stringBuffer.append(nameLength);
         stringBuffer.append(HexUtil.encode(newName));
+        Log.e("DeviceNameChange","newName"+HexUtil.encode(newName));
         byte[] bytes = HexUtil.hexStringToBytes(stringBuffer.toString());
         byte[] jywbyte = new byte[1];
         jywbyte[0] = YHUtils.byteArrYH(bytes);

@@ -7,7 +7,6 @@ import android.telephony.TelephonyManager;
 
 import com.zhou.zhoulib.model.NetworkType;
 
-
 /**
  * Created by sanders on 15/6/27.
  */
