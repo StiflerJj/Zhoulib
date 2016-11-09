@@ -56,6 +56,7 @@ public class GWLoginResponse implements Serializable{
             nameLength = Integer.parseInt(responseStr.substring(22, 24));
             int nameEnd = 23+nameLength*2+1;
             name = responseStr.substring(24, nameEnd);
+            Log.e("name",name);
             Log.e("name", HexUtil.decodeText(name));
             boxVersion = responseStr.substring(nameEnd, nameEnd + 2);
             protocolVer = responseStr.substring(nameEnd + 2, nameEnd + 4);
@@ -91,7 +92,7 @@ public class GWLoginResponse implements Serializable{
                             deviceendIndex += 4;
                         }
                         String status = "";
-                        if(deviceTypeId.equals(Const.SwitchType)||deviceTypeId.equals(Const.ShadeControl)){
+                        if(deviceTypeId.equals(Const.SwitchType)||deviceTypeId.equals(Const.ShadeControl)||deviceTypeId.equals("0002")){
                             status = deviceListStr.substring(deviceendIndex, deviceendIndex+2);
                             deviceendIndex += 2;
                         }
@@ -142,9 +143,7 @@ public class GWLoginResponse implements Serializable{
             }else{
                 Log.e("LoginResponse","暂无设备");
             }
-
         }
-
     }
 
 

@@ -15,9 +15,9 @@ public class DeviceDefence extends Base{
     public DeviceDefence(String serialId,String deviceId,String endPoint,String armModel,String armStarttime,String armEndtime){
         stringBuffer.append(head);
         stringBuffer.append("0019800f");
+        stringBuffer.append(serialId);
         stringBuffer.append(deviceId);
         stringBuffer.append(endPoint);
-        stringBuffer.append(serialId);
         stringBuffer.append(armModel);
         stringBuffer.append(armStarttime);
         stringBuffer.append(armEndtime);

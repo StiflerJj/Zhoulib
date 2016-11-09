@@ -147,12 +147,14 @@ import java.util.Arrays;
     public static String decodeText(String bytes)
     {
         ByteArrayOutputStream baos=new ByteArrayOutputStream(bytes.length()/2);
+        String tranBytes = bytes.toUpperCase();
         //将每2位16进制整数组装成一个字节
-        for(int i=0;i<bytes.length();i+=2)
-            baos.write((hexString.indexOf(bytes.charAt(i))<<4 |hexString.indexOf(bytes.charAt(i+1))));
+        for(int i=0;i<bytes.length();i+=2) {
+            baos.write((hexString.indexOf(tranBytes.charAt(i)) << 4 | hexString.indexOf(tranBytes.charAt(i + 1))));
+            }
         String bb = "";
         try {
-            bb = new String(baos.toByteArray(), "UTF-8");
+            bb = new String(baos.toByteArray(), "utf-8");
         } catch (Exception e) {
             e.printStackTrace();
         }
