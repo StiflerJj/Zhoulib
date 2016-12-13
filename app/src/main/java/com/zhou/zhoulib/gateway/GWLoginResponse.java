@@ -16,8 +16,8 @@ public class GWLoginResponse implements Serializable{
     private static final String TAG = "GWLoginResponse";
     private static final long serialVersionUID = 942522314804402970L;
     private String mac;
-    private int nameLength;
-    private String name;
+    private int gatewaynameLength;
+    private String gatewayname;
     private String boxVersion,protocolVer;
     private int deviceCount;
     private ArrayList<Device> devices;
@@ -53,11 +53,11 @@ public class GWLoginResponse implements Serializable{
             devices = new ArrayList<>();
             device2List = new ArrayList<Device2>();
             mac = responseStr.substring(10, 22);
-            nameLength = Integer.parseInt(responseStr.substring(22, 24));
-            int nameEnd = 23+nameLength*2+1;
-            name = responseStr.substring(24, nameEnd);
-            Log.e("name",name);
-            Log.e("name", HexUtil.decodeText(name));
+            gatewaynameLength = Integer.parseInt(responseStr.substring(22, 24));
+            int nameEnd = 23+gatewaynameLength*2+1;
+            gatewayname = responseStr.substring(24, nameEnd);
+            Log.e("gatewayname",gatewayname);
+            Log.e("gatewayname", HexUtil.decodeText(gatewayname));
             boxVersion = responseStr.substring(nameEnd, nameEnd + 2);
             protocolVer = responseStr.substring(nameEnd + 2, nameEnd + 4);
             int countEnd = nameEnd+8;
@@ -77,8 +77,9 @@ public class GWLoginResponse implements Serializable{
                     String deviceName = deviceListStr.substring(deviceendIndex,deviceendIndex+deviceNameLength*2);
                     Log.e("deviceName",deviceName);
                     deviceendIndex = deviceendIndex + deviceNameLength*2;
-                    int deviceTypeIdCount = Integer.parseInt(deviceListStr.substring(deviceendIndex, deviceendIndex+2));
-                    deviceendIndex += 2;
+                    String online = deviceListStr.substring(deviceendIndex,deviceendIndex+2);
+                    int deviceTypeIdCount = Integer.parseInt(deviceListStr.substring(deviceendIndex+2, deviceendIndex+4));
+                    deviceendIndex += 4;
 
                     for (int j=0; j<deviceTypeIdCount;j++){
                         Device2 device2 = new Device2();
@@ -100,6 +101,7 @@ public class GWLoginResponse implements Serializable{
                         String deviceName1= HexUtil.decodeText(deviceName);
                         Log.e("deviceName1",deviceName1);
                         device2.setDeviceName(deviceName1);
+                        device2.setOnline(online);
                         device2.setZoneType(zoneType);
                         device2.setStatus(status);
                         device2.setDeviceTypeId(deviceTypeId);
@@ -108,37 +110,6 @@ public class GWLoginResponse implements Serializable{
                         device2List.add(device2);
                         Log.e(TAG, "device "+j+device2.toString());
                     }
-
-//                    Device device = new Device();
-//
-//                    device.setDeviceId(deviceListStr.substring(deviceendIndex,deviceendIndex+16));
-//                    Log.e("setDeviceId", device.getDeviceId());
-//                    deviceendIndex = deviceendIndex+16;
-//                    device.setDeviceNameLength(Integer.parseInt(deviceListStr.substring(deviceendIndex, deviceendIndex+2)));
-//                    deviceendIndex = deviceendIndex+2;
-//                    device.setDeviceName(responseStr.substring(deviceendIndex, deviceendIndex+device.getDeviceNameLength()*2));
-//                    deviceendIndex = deviceendIndex+device.getDeviceNameLength()*2;
-//                    device.setDeviceTypeIdCount(Integer.parseInt(deviceListStr.substring(deviceendIndex, deviceendIndex + 2)));
-//                    deviceendIndex = deviceendIndex+2;
-//                    ArrayList<DeviceTypeIdObj> typeIdObjs = new ArrayList<>();
-//                    for(int j=0;j<device.getDeviceTypeIdCount();j++){
-//                        DeviceTypeIdObj deviceTypeIdObj = new DeviceTypeIdObj();
-//                        deviceTypeIdObj.setEndPoint(deviceListStr.substring(deviceendIndex,deviceendIndex+2));
-//                        deviceendIndex = deviceendIndex+2;
-//                        if(deviceListStr!=null){
-//                            String deviceTypeId = deviceListStr.substring(deviceendIndex,deviceendIndex+4);
-//                            deviceendIndex = deviceendIndex+4;
-//                            deviceTypeIdObj.setDeviceTypeId(deviceTypeId);
-//                            if(deviceTypeId.equals(Const.DefenceType)){
-//                                deviceTypeIdObj.setZoneType(deviceListStr.substring(deviceendIndex,deviceendIndex+4));
-//                                deviceendIndex = deviceendIndex+4;
-//                            }
-//                        }
-//                        typeIdObjs.add(deviceTypeIdObj);
-//                    }
-//                    device.setDeviceTypeIds(typeIdObjs);
-//                    devices.add(device);
-//                    Log.e("device"+i,device.toString());
                 }
             }else{
                 Log.e("LoginResponse","暂无设备");
@@ -160,7 +131,7 @@ public class GWLoginResponse implements Serializable{
     }
 
     public String getName() {
-        return name;
+        return gatewayname;
     }
 
     public String getMac() {
@@ -168,7 +139,7 @@ public class GWLoginResponse implements Serializable{
     }
 
     public int getNameLength() {
-        return nameLength;
+        return gatewaynameLength;
     }
 
     public int getDeviceCount() {

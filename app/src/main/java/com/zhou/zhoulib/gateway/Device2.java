@@ -15,7 +15,12 @@ public class Device2 implements Serializable{
     private String deviceName;
     private int deviceNameLength;
     private String Status;
+    private String Online;
     private boolean isCheck;
+
+    public String getOnline() {return Online;}
+
+    public void setOnline(String online) {Online = online;}
 
     public String getStatus() {return Status;}
 
@@ -89,6 +94,7 @@ public class Device2 implements Serializable{
                 ", deviceTypeId='" + deviceTypeId + '\'' +
                 ", zoneType='" + zoneType + '\'' +
                 ", status='" + Status + '\'' +
+                ", online='" + Online + '\'' +
                 ", deviceName='" + deviceName + '\''
                 + ", deviceNameLength=" + deviceNameLength
                 + '}';

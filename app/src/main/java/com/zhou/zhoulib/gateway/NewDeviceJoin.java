@@ -2,7 +2,6 @@ package com.zhou.zhoulib.gateway;
 
 import android.util.Log;
 
-
 import com.zhou.zhoulib.util.Const;
 import com.zhou.zhoulib.util.HexUtil;
 
@@ -74,7 +73,9 @@ public class NewDeviceJoin {
                 String zonetype = "";
                 if(devicetypeid.equals(Const.DefenceType)){
                     zonetype = receiveData.substring(8+deviceTypeIdIndex+deviceNameLen*2, 12+deviceTypeIdIndex+deviceNameLen*2);
-                }
+                    deviceTypeIdIndex = 10+deviceTypeIdIndex;
+                } else {
+                    deviceTypeIdIndex = 6+deviceTypeIdIndex;}
 
                 device.setDeviceId(deviceid);
                 device.setDeviceTypeId(devicetypeid);
